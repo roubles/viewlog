@@ -1,8 +1,8 @@
 # viewlog
 
-viewlog is a command line tool to browse and historical versions of files stored using git, and open them in vi|vim|mvim|gvim. 
+viewlog is a command line tool to browse and historical versions of files stored using git, and open them in vi, vim, mvim and gvim. 
 
-The terminal browser is a looping picker that shows up as follows:
+More technically, viewlog is a terminal based git log browser that allows you to cycle through all your git commits. Here is a sample screen:
 ```
 $ viewlog rmed
  Pick your git commit id
@@ -63,8 +63,22 @@ $ ./install.py
 ```
 
 ## Custom editor
-You can use your own editor:
+The default editor is vim, but that can be changed.
 ```
-$ viewlog <filename> --editor [mvim|gvim]
+$ viewlog <filename> --editor [vi|mvim|gvim]
 ```
 The operating system emacs is not supported, mostly because I can't get it read from stdin.
+
+## Custom log ling
+```
+$ viewlog README.md --logformat "%h - %ad, %an: %s"
+ Pick your git commit id
+
+ => 1e283cf - Sun Jan 24 00:58:41 2016 -0500, roubles: killed it.
+    8bba27e - Sun Jan 24 00:57:52 2016 -0500, roubles: vim ftw!
+    5be85d5 - Sun Jan 24 00:55:28 2016 -0500, roubles: All your base are belong to us.
+    cbf5d8e - Sun Jan 24 00:48:13 2016 -0500, roubles: Will it blend?
+    edaceb1 - Sun Jan 24 00:45:01 2016 -0500, roubles: Update README.md
+    918166c - Sun Jan 24 00:34:54 2016 -0500, rouble: initial commit
+    exit
+```
