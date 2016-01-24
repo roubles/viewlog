@@ -55,11 +55,18 @@ optional arguments:
 ```
 
 ## Install
-It's really just one python file that you can store in your path. There is a standard install script.
+```
+$ pip install viewlog
+```
+or
 ```
 $ git clone https://github.com/roubles/viewlog
 $ cd viewlog
-$ ./install.py
+$ python setup.py install
+```
+Note that viewlog is dependent on the pypi package 'pick'. If it doesn't automatically get installed, you need to:
+```
+$ pip install pick
 ```
 
 ## Custom editor
