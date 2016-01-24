@@ -1,10 +1,13 @@
 viewlog
 =======
 
-viewlog is a command line tool to browse and historical versions of
-files stored using git, and open them in vi\|vim\|mvim\|gvim.
+viewlog is a command line tool to browse historical versions of files
+stored using git, and open it with vim (or graphical vim).
 
-The terminal browser is a looping picker that shows up as follows:
+More technically, viewlog is a terminal based git log browser that
+allows you to cycle through all your git commits. On selection, it will
+open that version of file in vim (or graphical vim). Here is a sample
+screen:
 
 ::
 
@@ -53,7 +56,7 @@ Usage
 
     usage: viewlog [-h] [-e EDITOR] [-s SKIP] [-l LIMIT] [-f LOGFORMAT] filename
 
-    terminal git log broswer
+    terminal git log browser
 
     positional arguments:
       filename              Path to filename
@@ -71,25 +74,51 @@ Usage
 Install
 -------
 
-It's really just one python file that you can store in your path. There
-is a standard install script.
+::
+
+    $ pip install viewlog
+
+or
 
 ::
 
     $ git clone https://github.com/roubles/viewlog
     $ cd viewlog
-    $ ./install.py
+    $ python setup.py install
+
+Note that viewlog is dependent on the pypi package 'pick'. If it doesn't
+automatically get installed, you need to:
+
+::
+
+    $ pip install pick
 
 Custom editor
 -------------
 
-You can use your own editor:
+The default editor is vim, but that can be changed.
 
 ::
 
-    $ viewlog <filename> --editor [mvim|gvim]
+    $ viewlog <filename> --editor [vi|mvim|gvim]
 
 The operating system emacs is not supported, mostly because I can't get
-it read from stdin.
+it to read from stdin.
+
+Custom log line
+---------------
+
+::
+
+    $ viewlog README.md --logformat "%h - %ad, %an: %s"
+     Pick your git commit id
+
+     => 1e283cf - Sun Jan 24 00:58:41 2016 -0500, roubles: killed it.
+        8bba27e - Sun Jan 24 00:57:52 2016 -0500, roubles: vim ftw!
+        5be85d5 - Sun Jan 24 00:55:28 2016 -0500, roubles: All your base are belong to us.
+        cbf5d8e - Sun Jan 24 00:48:13 2016 -0500, roubles: Will it blend?
+        edaceb1 - Sun Jan 24 00:45:01 2016 -0500, roubles: Update README.md
+        918166c - Sun Jan 24 00:34:54 2016 -0500, rouble: initial commit
+        exit
 
 .. |alt tag| image:: https://raw.github.com/roubles/viewlog/master/doc/viewlog.gif

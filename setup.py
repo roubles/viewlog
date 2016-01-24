@@ -18,7 +18,7 @@ class DocGenerator(Command):
     
 setup(
     name='viewlog',
-    version='1.1.1',
+    version='1.1.2',
     author='roubles',
     author_email='rouble@gmail.com',
     url='https://github.com/roubles/viewlog',
