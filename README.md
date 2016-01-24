@@ -67,4 +67,4 @@ You can use your own editor:
 ```
 $ viewlog <filename> --editor [mvim|gvim]
 ```
-The operating system emacs is not supported, mostly because I can't get it read from stdin, and has nothing to do with the fact that I don't think its a good editor.
+The operating system emacs is not supported, mostly because I can't get it read from stdin.
