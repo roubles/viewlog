@@ -38,7 +38,7 @@ vimgitshow() { git show "$1" | vim - "+set filetype=${1##*.}"; }
 ```
 usage: viewlog [-h] [-e EDITOR] [-s SKIP] [-l LIMIT] [-f LOGFORMAT] filename
 
-terminal git log broswer
+terminal git log browser
 
 positional arguments:
   filename              Path to filename
@@ -67,9 +67,9 @@ The default editor is vim, but that can be changed.
 ```
 $ viewlog <filename> --editor [vi|mvim|gvim]
 ```
-The operating system emacs is not supported, mostly because I can't get it read from stdin.
+The operating system emacs is not supported, mostly because I can't get it to read from stdin.
 
-## Custom log ling
+## Custom log line
 ```
 $ viewlog README.md --logformat "%h - %ad, %an: %s"
  Pick your git commit id
