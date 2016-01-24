@@ -1,8 +1,8 @@
 # viewlog
 
-viewlog is a command line tool to browse and historical versions of files stored using git, and open them in vi, vim, mvim and gvim. 
+viewlog is a command line tool to browse  historical versions of files stored using git, and open it with vim (or graphical vim). 
 
-More technically, viewlog is a terminal based git log browser that allows you to cycle through all your git commits. Here is a sample screen:
+More technically, viewlog is a terminal based git log browser that allows you to cycle through all your git commits. On selection, it will open that version of file in vim (or graphical vim). Here is a sample screen:
 ```
 $ viewlog rmed
  Pick your git commit id
