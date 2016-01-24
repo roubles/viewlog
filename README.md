@@ -1,6 +1,8 @@
 # viewlog
 
-viewlog is a command line tool to browse and view historical versions of files stored using git in vim. The terminal browser is a looping picker that shows up as follows
+viewlog is a command line tool to browse and historical versions of files stored using git, and open them in vi|vim|mvim|gvim. 
+
+The terminal browser is a looping picker that shows up as follows:
 ```
 $ viewlog rmed
  Pick your git commit id
@@ -23,7 +25,7 @@ Obligatory animated gif:
 ![alt tag](https://raw.github.com/roubles/viewlog/master/doc/viewlog.gif)
 
 ## Hat tip
-Hat tip to Wong2 for [pick](https://github.com/wong2/pick) library.
+Hat tip to Wong2 for the [pick](https://github.com/wong2/pick) library that was used for the curses picker implementation.
 
 ## Motivation
 I know there are lots of git gui's out there. But I like terminals. Maybe I am oldschool. I was getting by with this bash function for a while:
