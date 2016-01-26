@@ -87,7 +87,7 @@ optional arguments:
 ## Custom editor
 The default editor is less (remember, less is more), but that can be changed.
 ```
-$ viewlog <filename> --editor [vi|vim|mvim|gvim|more|emacs]
+$ viewlog <filename> --editor [vi|vim|mvim|gvim|less|more|emacs|<your editor here>]
 ```
 As of version 1.1.4, the operating system emacs is supported.
 
