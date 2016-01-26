@@ -4,7 +4,7 @@ import os
 import shutil
 from setuptools import setup,Command
 
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 
 class Doc(Command):
     description = "Custom doc command that converts README.md to the reStructured text file README.txt"
