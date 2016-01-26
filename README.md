@@ -23,7 +23,7 @@ $ viewlog ~/git/rmed/sh/rmed
 ```
 
 ## Install
-If you have pip, one line install:
+If you have pip, it is a one line install:
 ```
 $ pip install viewlog
 ```
@@ -92,7 +92,7 @@ optional arguments:
 ## Custom editor
 The default editor is less (remember, less is more), but that can be changed.
 ```
-$ viewlog <filename> --editor [vi|vim|mvim|gvim|less|more|emacs|<your editor here>]
+$ viewlog <filename> --editor [vi|vim|mvim|gvim|less|more|emacs|open|<your editor here>]
 ```
 As of version 1.1.4, the operating system emacs is supported.
 
@@ -133,7 +133,7 @@ $ viewlog rmed --grep "[M|m]ore"
     exit
 ```
 
-## Advanced Searching
+## Advanced Searching and how to use --logoptions
 You can grep for multiple patterns and match all patterns by using the --logoptions feature
 ```
 Only match commits with the leter "[M|m]" AND the letter "n" in the log message
