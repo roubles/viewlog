@@ -25,7 +25,7 @@ def getBranch (filename):
         print "Unable to get branch for {0} using cmd {1}".format(filename, cmd)
         return DEFAULT_BRANCH
 
-def getPrettyCommits (filename, branch=DEFAULT_BRANCH, after=None, before=None, nomerges=False, skip = 0, limit = 10, logformat="%H - %ar, %an blessed the code thusly: %<(50,trunc)%s"):
+def getPrettyCommits (filename, branch=DEFAULT_BRANCH, after=None, before=None, nomerges=False, skip = 0, limit = 10, logformat="%H - %ar, %an blessed the code thusly: %<(50,trunc)%s", logoptions="", grep=None):
     commits = []
 
     # Get terminal width
@@ -37,7 +37,8 @@ def getPrettyCommits (filename, branch=DEFAULT_BRANCH, after=None, before=None, 
         mergestr = "--no-merges" if nomerges else ""
         afterstr = "--after \"" + after + "\"" if after else ""
         beforestr = "--before \"" + before + "\"" if before else ""
-        cmd = "git log {5} {4} {6} {7} --skip={0} --max-count={1} --pretty=format:\"{2}\" -- {3}".format(skip, limit, logformat, filename, branch, mergestr, afterstr, beforestr)
+        grepstr = "--grep \"" + grep + "\"" if grep else ""
+        cmd = "git log {5} {4} {6} {7} {8} {9} --skip={0} --max-count={1} --pretty=format:\"{2}\" -- {3}".format(skip, limit, logformat, filename, branch, mergestr, afterstr, beforestr, logoptions, grepstr)
 
         os.chdir(os.path.dirname(filename))
         output = check_output(shlex.split(cmd))
@@ -77,6 +78,8 @@ def setupParser ():
     parser.add_argument('-n', '--nomerges', help='Do not include commits from merged branches (Default: false)', action='store_true')
     parser.add_argument('-a', '--after', help='Commits after/since date', default=None)
     parser.add_argument('-u', '--before', help='Commits before/until date', default=None)
+    parser.add_argument('-g', '--grep', help='Limit the commits output to ones with log message that matches the specified pattern (regular expression)', default=None)
+    parser.add_argument('-o', '--logoptions', help='Extra options to pass directly to git log. (Escape the -- using \-\-)', default="")
     parser.add_argument('-k', '--keeptemp', help='Keep any created temp files (Default: false)', action='store_true')
     return parser
 
@@ -108,7 +111,7 @@ def crux ():
     limit = args.limit
     current_index = 0
     while True:
-        options = getPrettyCommits(absFilename, branch=branch, after=args.after, before=args.before, nomerges=args.nomerges, skip=skip, limit=limit, logformat=args.logformat)
+        options = getPrettyCommits(absFilename, branch=branch, after=args.after, before=args.before, nomerges=args.nomerges, skip=skip, limit=limit, logformat=args.logformat, logoptions=args.logoptions, grep=args.grep)
         try:
             optionCount = len(options)
             if optionCount == limit:

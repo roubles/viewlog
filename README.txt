@@ -6,15 +6,11 @@ stored using git, and open it in
 `less <https://en.wikipedia.org/wiki/Less_(Unix)>`__ (or any editor of
 your choice).
 
-More technically, viewlog is a terminal based git log browser that
-allows you to cycle through all your git commits. On selection, it will
-open that version of file in any editor. Here is a sample screen:
-
 ::
 
     $ viewlog ~/git/rmed/sh/rmed
      Pick your git commit id (choose 'exit' or ctrl-c to quit)
-     File: /Users/prmehta/git/rmed/sh/rmed
+     File: /Users/rouble/git/rmed/sh/rmed
 
      => 20000e5e59270e99bc134b9acade8c722cc410de - 4 days ago, Rajnikant blessed the code thusly: rewrote from scratch.
         8c0d5009b69afeca06333b8efd3a4690b92f64f5 - 4 days ago, Chuck Norris blessed the code thusly: obliterated all bugs.
@@ -72,8 +68,8 @@ while:
 
     vimgitshow() { git show "$1" | vim - "+set filetype=${1##*.}"; }
 
-... but then I decided to slap some code together and browse the history
-and use vim to open the files.
+... but then I decided to slap some code together to browse the history
+and use any editor to open the files.
 
 Usage
 -----
@@ -81,7 +77,8 @@ Usage
 ::
 
     usage: viewlog [-h] [-e EDITOR] [-s SKIP] [-l LIMIT] [-f LOGFORMAT]
-                   [-b BRANCH] [-n] [-a AFTER] [-u BEFORE] [-k]
+                   [-b BRANCH] [-n] [-a AFTER] [-u BEFORE] [-g GREP]
+                   [-o LOGOPTIONS] [-k]
                    filename
 
     terminal git log browser
@@ -106,6 +103,11 @@ Usage
                             Commits after/since date
       -u BEFORE, --before BEFORE
                             Commits before/until date
+      -g GREP, --grep GREP  Limit the commits output to ones with log message that
+                            matches the specified pattern (regular expression)
+      -o LOGOPTIONS, --logoptions LOGOPTIONS
+                            Extra options to pass directly to git log. (Escape the
+                            -- using \-\-)
       -k, --keeptemp        Keep any created temp files (Default: false)
 
 Custom editor
@@ -120,8 +122,8 @@ changed.
 
 As of version 1.1.4, the operating system emacs is supported.
 
-You can also open binary files. For instance on a mac to open a animated
-gif, I do:
+You can also open binary files. For instance on a mac to open an
+animated gif, I do:
 
 ::
 
@@ -129,6 +131,9 @@ gif, I do:
 
 Custom log line
 ---------------
+
+You can change the log line to whatever you want as long as the first
+parameter is still the commit id (%H or %h):
 
 ::
 
@@ -144,6 +149,40 @@ Custom log line
         edaceb1 - Sun Jan 24 00:45:01 2016 -0500, roubles: Update README.md
         918166c - Sun Jan 24 00:34:54 2016 -0500, rouble: initial commit
         next page
+        exit
+
+Searching
+---------
+
+You can grep for commits that contain a specific pattern in the log
+message
+
+::
+
+    Match any commits with "[M|m]ore" in the log message
+    $ viewlog rmed --grep "[M|m]ore"
+     Pick your git commit id (choose 'exit' or ctrl-c to quit)
+     File: /Users/rouble/git/rmed/sh/rmed
+
+     => e1a61f877c085dd79b863c0664007fc2c9880bda - 5 days ago, rouble blessed the code thusly: more features
+        8b10be72399c66a51462e7c8cd801b726ea6bab9 - 5 days ago, rouble blessed the code thusly: More features.
+        f1711513272d8e1dda0db73f1f491c7a575c2f91 - 6 days ago, rouble blessed the code thusly: More features
+        exit
+
+Advanced Searching
+------------------
+
+You can grep for multiple patterns and match all patterns by using the
+--logoptions feature
+
+::
+
+    Only match commits with the leter "[M|m]" AND the letter "n" in the log message
+    $ viewlog rmed --grep "[M|m]" --logoptions="\-\-grep=n \-\-all-match"
+     Pick your git commit id (choose 'exit' or ctrl-c to quit)
+     File: /Users/rouble/git/rmed/sh/rmed
+
+     => 680930c9aa5f176bfa9961d0d142e41f67a74dad - 6 days ago, rouble blessed the code thusly: Add footer and some documentation.
         exit
 
 .. |alt tag| image:: https://raw.github.com/roubles/viewlog/master/doc/viewlog.gif
