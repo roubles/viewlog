@@ -2,7 +2,6 @@
 
 viewlog is a command line tool to browse historical versions of files stored using git, and open it in [less](https://en.wikipedia.org/wiki/Less_(Unix)) (or any editor of your choice). 
 
-More technically, viewlog is a terminal based git log browser that allows you to cycle through all your git commits. On selection, it will open that version of file in any editor. Here is a sample screen:
 ```
 $ viewlog ~/git/rmed/sh/rmed
  Pick your git commit id (choose 'exit' or ctrl-c to quit)
@@ -50,12 +49,13 @@ I know there are lots of git gui's out there. But I like terminals. Maybe I am o
 ```
 vimgitshow() { git show "$1" | vim - "+set filetype=${1##*.}"; }
 ```
-... but then I decided to slap some code together and browse the history and use vim to open the files.
+... but then I decided to slap some code together to browse the history and use any editor to open the files.
 
 ## Usage
 ```
 usage: viewlog [-h] [-e EDITOR] [-s SKIP] [-l LIMIT] [-f LOGFORMAT]
-               [-b BRANCH] [-n] [-a AFTER] [-u BEFORE] [-k]
+               [-b BRANCH] [-n] [-a AFTER] [-u BEFORE] [-g GREP]
+               [-o LOGOPTIONS] [-k]
                filename
 
 terminal git log browser
@@ -80,6 +80,11 @@ optional arguments:
                         Commits after/since date
   -u BEFORE, --before BEFORE
                         Commits before/until date
+  -g GREP, --grep GREP  Limit the commits output to ones with log message that
+                        matches the specified pattern (regular expression)
+  -o LOGOPTIONS, --logoptions LOGOPTIONS
+                        Extra options to pass directly to git log. (Escape the
+                        -- using \-\-)
   -k, --keeptemp        Keep any created temp files (Default: false)
 
 ```
@@ -91,7 +96,7 @@ $ viewlog <filename> --editor [vi|vim|mvim|gvim|less|more|emacs|<your editor her
 ```
 As of version 1.1.4, the operating system emacs is supported.
 
-You can also open binary files. For instance on a mac to open a animated gif, I do:
+You can also open binary files. For instance on a mac to open an animated gif, I do:
 ```
 $ viewlog viewlog.gif --editor "open -a Safari"
 ```
