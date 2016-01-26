@@ -23,7 +23,7 @@ $ viewlog ~/git/rmed/sh/rmed
 ```
 
 ## Install
-If you have pip, one line install:
+If you have pip, it is a one line install:
 ```
 $ pip install viewlog
 ```
@@ -92,7 +92,7 @@ optional arguments:
 ## Custom editor
 The default editor is less (remember, less is more), but that can be changed.
 ```
-$ viewlog <filename> --editor [vi|vim|mvim|gvim|less|more|emacs|<your editor here>]
+$ viewlog <filename> --editor [vi|vim|mvim|gvim|less|more|emacs|open|<your editor here>]
 ```
 As of version 1.1.4, the operating system emacs is supported.
 
