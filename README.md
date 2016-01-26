@@ -133,7 +133,7 @@ $ viewlog rmed --grep "[M|m]ore"
     exit
 ```
 
-## Advanced Searching
+## Advanced Searching and how to use --logoptions
 You can grep for multiple patterns and match all patterns by using the --logoptions feature
 ```
 Only match commits with the leter "[M|m]" AND the letter "n" in the log message
