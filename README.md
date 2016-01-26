@@ -6,7 +6,7 @@ More technically, viewlog is a terminal based git log browser that allows you to
 ```
 $ viewlog ~/git/rmed/sh/rmed
  Pick your git commit id (choose 'exit' or ctrl-c to quit)
- File: /Users/prmehta/git/rmed/sh/rmed
+ File: /Users/rouble/git/rmed/sh/rmed
 
  => 20000e5e59270e99bc134b9acade8c722cc410de - 4 days ago, Rajnikant blessed the code thusly: rewrote from scratch.
     8c0d5009b69afeca06333b8efd3a4690b92f64f5 - 4 days ago, Chuck Norris blessed the code thusly: obliterated all bugs.
@@ -97,6 +97,7 @@ $ viewlog viewlog.gif --editor "open -a Safari"
 ```
 
 ## Custom log line
+You can change the log line to whatever you want as long as the first parameter is still the commit id (%H or %h):
 ```
 $ viewlog README.md --logformat "%h - %ad, %an: %s"
  => b2f88c8 - Sun Jan 24 15:21:57 2016 -0500, roubles: emacs ftw!
@@ -110,5 +111,31 @@ $ viewlog README.md --logformat "%h - %ad, %an: %s"
     edaceb1 - Sun Jan 24 00:45:01 2016 -0500, roubles: Update README.md
     918166c - Sun Jan 24 00:34:54 2016 -0500, rouble: initial commit
     next page
+    exit
+```
+
+## Searching
+You can grep for commits that contain a specific pattern in the log message
+```
+Match any commits with "[M|m]ore" in the log message
+$ viewlog rmed --grep "[M|m]ore"
+ Pick your git commit id (choose 'exit' or ctrl-c to quit)
+ File: /Users/rouble/git/rmed/sh/rmed
+
+ => e1a61f877c085dd79b863c0664007fc2c9880bda - 5 days ago, rouble blessed the code thusly: more features
+    8b10be72399c66a51462e7c8cd801b726ea6bab9 - 5 days ago, rouble blessed the code thusly: More features.
+    f1711513272d8e1dda0db73f1f491c7a575c2f91 - 6 days ago, rouble blessed the code thusly: More features
+    exit
+```
+
+## Advanced Searching
+You can grep for multiple patterns and match all patterns by using the --logoptions feature
+```
+Only match commits with the leter "[M|m]" AND the letter "n" in the log message
+$ viewlog rmed --grep "[M|m]" --logoptions="\-\-grep=n \-\-all-match"
+ Pick your git commit id (choose 'exit' or ctrl-c to quit)
+ File: /Users/rouble/git/rmed/sh/rmed
+
+ => 680930c9aa5f176bfa9961d0d142e41f67a74dad - 6 days ago, rouble blessed the code thusly: Add footer and some documentation.
     exit
 ```
